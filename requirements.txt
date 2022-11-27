@@ -1,0 +1,4 @@
+uvicorn
+starlette
+git+https://github.com/Rapptz/asqlite
+multipart
