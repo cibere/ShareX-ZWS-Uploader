@@ -46,12 +46,12 @@ async def upload_endpoint(request: Request):
     await db.cache.add(
         _bytes=image, key=filename, mimetype=mime, delete_code=deletion_code
     )
-
+    url = str(request.url).removesuffix("/upload")
     content = {
         "status_code": 200,
         "file_id": filename,
-        "url": f"https://i.cibere.dev/{filename}",
-        "deletion_url": f"https://i.cibere.dev/delete?code={deletion_code}",
+        "url": f"{url}/{filename}",
+        "deletion_url": f"{url}/delete?code={deletion_code}",
         "deletion_code": deletion_code,
     }
     await db.logs.add("upload image", content["url"])
